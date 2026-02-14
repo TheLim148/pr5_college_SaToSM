@@ -80,7 +80,7 @@ def test_withdraw_checks_funds_and_fee():
     assert returned == Decimal("10.00")
     # fee 0.10, total 10.10
     assert acc.balance == Decimal("89.90")
-    assert acc.transactions[-1] == "-10.00 (fee: 0.10) RUB"
+    assert acc.transactions[-1] == "-10.00 (комиссия: 0.10) RUB"
 
 
 def test_withdraw_insufficient_funds():
@@ -95,7 +95,7 @@ def test_convert_to_changes_currency_and_uses_converter(converter_1to1):
     acc.convert_to("USD", converter=converter_1to1)
     assert acc.currency == "USD"
     assert acc.balance == Decimal("101.00")
-    assert acc.transactions[-1] == "Convert to USD"
+    assert acc.transactions[-1] == "Конвертировать в USD"
 
 
 def test_get_statement_is_snapshot_copy():
@@ -144,8 +144,8 @@ def test_transfer_success_different_currency_real_rates():
     assert credited == Decimal("0.10")
     assert acc1.balance == Decimal("90.00")
     assert acc2.balance == Decimal("0.10")
-    assert "Transfer -10.00 RUB" in acc1.transactions[-1]
-    assert "Transfer +0.10 USD" in acc2.transactions[-1]
+    assert "Передача -10.00 RUB" in acc1.transactions[-1]
+    assert "Передача +0.10 USD" in acc2.transactions[-1]
 
 
 def test_transfer_sender_blocked():

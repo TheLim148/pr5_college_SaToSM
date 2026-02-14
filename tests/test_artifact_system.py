@@ -95,3 +95,22 @@ def test_get_artifacts_by_type_case_insensitive_and_validation():
         ap.get_artifacts_by_type(None)
     with pytest.raises(ValueError):
         ap.get_artifacts_by_type("")
+
+def test_get_artifacts_by_type_empty_list_returns_empty():
+    ap = ArtifactProcessor()
+    assert ap.get_artifacts_by_type("magical") == []
+    assert ap.get_artifacts_by_type("normal") == []
+
+
+def test_calculate_total_power_ignores_normal_even_if_stronger():
+    ap = ArtifactProcessor()
+    ap.add_artifact("Nuke", 10_000, False)   # normal
+    ap.add_artifact("Wand", 3, True)         # magical
+    assert ap.calculate_total_power() == 3
+
+
+def test_add_artifact_allows_float_power_if_positive():
+    ap = ArtifactProcessor()
+    art = ap.add_artifact("Floaty", 1.5, True)
+    assert art["power"] == 1.5
+    assert art["type"] == "magical"
