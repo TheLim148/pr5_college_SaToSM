@@ -24,3 +24,13 @@ mutants/
 # IDE
 .vscode/
 .idea/
+
+# Office temporary files
+.~$*
+.~lock.*.docx#
+
+# Word
+*.docx
+
+# Markdown
+report.md
